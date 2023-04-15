@@ -1,0 +1,6 @@
+- name: test playbook
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: check system
+      command: whoami
