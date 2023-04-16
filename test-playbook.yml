@@ -2,7 +2,8 @@
   hosts: host
   collections:
     - paloaltonetworks.panos
-
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
   tasks:
   - name: Get the system info
     panos_op:
