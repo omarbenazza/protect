@@ -7,12 +7,12 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-  - name: Get the system info
-    panos_op:
-      provider: '{{ provider }}'
-      cmd: 'show system info'
-    register: res
+    - name: Get the system info
+      panos_op:
+         provider: "{{ provider }}"
+         cmd: 'show system info'
+      register: res
 
-  - debug:
-      msg: '{{ res.stdout }}'
+    - debug:
+        var: res
 
