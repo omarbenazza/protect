@@ -9,7 +9,11 @@
   tasks:
     - name: Get the system info
       panos_op:
-         provider: "{{ provider }}"
+         provider: 
+            provider:
+              ip_address: "192.168.0.10"
+              username: "{{ username }}"
+              password: "{{ password }}"
          cmd: 'show system info'
       register: res
 
