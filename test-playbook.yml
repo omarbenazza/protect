@@ -1,5 +1,5 @@
 - name: test playbook
-  hosts: hosts
+  hosts: host
   collections:
     - paloaltonetworks.panos
 
