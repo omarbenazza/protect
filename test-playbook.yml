@@ -14,5 +14,5 @@
       register: res
 
     - debug:
-        var: res
+        var: res.stdout
 
