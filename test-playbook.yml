@@ -1,9 +1,11 @@
 - name: test playbook
-  hosts: host
+  hosts: localhost
+  gather_facts: no
+  connection: local
   collections:
     - paloaltonetworks.panos
-  roles:
-    - role: PaloAltoNetworks.paloaltonetworks
+  # roles:
+  #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
   - name: Get the system info
     panos_op:
