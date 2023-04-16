@@ -1,5 +1,5 @@
 - name: test playbook
-collections:
+  collections:
     - paloaltonetworks.panos
 
   tasks:
@@ -11,3 +11,4 @@ collections:
 
   - debug:
       msg: '{{ res.stdout }}'
+
