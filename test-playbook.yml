@@ -4,15 +4,17 @@
   connection: local
   collections:
     - paloaltonetworks.panos
+  vars:
+     provider: 
+        ip_address: "{{ ip_address }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
     - name: Get the system info
       panos_op:
-         provider:
-            ip_address: "{{ ip_address }}"
-            username: "{{ username }}"
-            password: "{{ password }}"
+         provider: "{{ provider }}"
          cmd: 'show system info'
       register: res
 
@@ -21,40 +23,30 @@
 
     - name: Create object 'Test-One'
       panos_address_object:
-        provider:
-            ip_address: "{{ ip_address }}"
-            username: "{{ username }}"
-            password: "{{ password }}"
+        provider: "{{ provider }}"
         name: 'Test-One'
         value: '192.168.0.98'
         description: 'Machine A'
         
     - name: Create object 'Test-Two'
       panos_address_object:
-        provider:
-            ip_address: "{{ ip_address }}"
-            username: "{{ username }}"
-            password: "{{ password }}"
+        provider: "{{ provider }}"
         name: 'Test-Two'
         value: '192.168.0.99'
         description: 'Machine B'
     
-    - name: Create object 'Test-three'
+    - name: Create object 'Test-Three'
       panos_address_object:
-        provider:
-            ip_address: "{{ ip_address }}"
-            username: "{{ username }}"
-            password: "{{ password }}"
-        name: 'Test-three'
+        provider: "{{ provider }}"
+        name: 'Test-Three'
         value: '192.168.0.67'
         description: 'Machine C'
 
-    - name: Edit object group 'Blacklist'
+    - name: Create object group 'Blacklist'
       panos_address_group:
-        provider:
-            ip_address: "{{ ip_address }}"
-            username: "{{ username }}"
-            password: "{{ password }}"
+        provider: "{{ provider }}"
         name: 'Blacklist'
-        static_value: ['Test-three']
-
+        static_value: [{{ item }}]
+      loop:
+       - 'Test-One'
+       - 'Test-Two'
