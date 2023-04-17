@@ -1,0 +1,30 @@
+- name: test playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  collections:
+    - paloaltonetworks.panos
+  vars:
+     provider: 
+        ip_address: "{{ ip_address }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+  # roles:
+  #   - role: PaloAltoNetworks.paloaltonetworks
+  tasks:
+    - name: Create object 'Test-One'
+      panos_address_object:
+        provider: "{{ provider }}"
+        name: "{{ item.name }}"
+        value: "{{ item.ip_address }}"
+        description: "{{ item.description }}"
+      loop: "{{ objects }}"
+        
+
+    - name: Create object group 'Blacklist'
+      panos_address_group:
+        provider: "{{ provider }}"
+        name: 'Blacklist'
+        static_value: ["{{ item.name }}"]
+        state: "merged"
+      loop: "{{ objects }}"

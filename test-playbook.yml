@@ -12,20 +12,47 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
+    - name: Get the system info
+      panos_op:
+         provider: "{{ provider }}"
+         cmd: 'show system info'
+      register: res
+
+    - debug:
+        var: res.stdout
+
     - name: Create object 'Test-One'
       panos_address_object:
         provider: "{{ provider }}"
-        name: "{{ item.name }}"
-        value: "{{ item.ip_address }}"
-        description: "{{ item.description }}"
-      loop: "{{ objects }}"
+        name: 'Test-One'
+        value: '192.168.0.98'
+        description: 'Machine A'
         
+    - name: Create object 'Test-Two'
+      panos_address_object:
+        provider: "{{ provider }}"
+        name: 'Test-Two'
+        value: '192.168.0.99'
+        description: 'Machine B'
+    
+    - name: Create object 'Test-Three'
+      panos_address_object:
+        provider: "{{ provider }}"
+        name: 'Test-Three'
+        value: '192.168.0.67'
+        description: 'Machine C'
 
-    - name: Create object group 'Blacklist'
+    - name: Create object 'Test-Four'
+      panos_address_object:
+        provider: "{{ provider }}"
+        name: 'Test-Four'
+        value: '192.168.0.68'
+        description: 'Machine C'
+
+    - name: Edit object group 'Blacklist'
       panos_address_group:
         provider: "{{ provider }}"
         name: 'Blacklist'
-        static_value: ["{{ item.name }}"]
+        static_value: ['Test-Four']
         state: "merged"
-      loop: "{{ objects }}"
 
