@@ -21,14 +21,20 @@
 
     - name: Create object 'Test-One'
       panos_address_object:
-        provider: '{{ provider }}'
+        provider:
+            ip_address: "{{ ip_address }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
         name: 'Test-One'
         value: '192.168.0.98'
         description: 'Machine A'
         
     - name: Create object 'Test-Two'
       panos_address_object:
-        provider: '{{ provider }}'
+        provider:
+            ip_address: "{{ ip_address }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
         name: 'Test-Two'
         value: '192.168.0.99'
         description: 'Machine B'
