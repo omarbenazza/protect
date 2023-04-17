@@ -18,13 +18,27 @@
 
     - debug:
         var: res.stdout
-    - name: Create object group 'SI'
+
+    - name: Create object 'Test-One'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'Test-One'
+        value: '192.168.0.98'
+        description: 'Machine A'
+        
+    - name: Create object 'Test-Two'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'Test-Two'
+        value: '192.168.0.99'
+        description: 'Machine B'
+
+    - name: Edit object group 'Blacklist'
       panos_address_group:
         provider:
             ip_address: "{{ ip_address }}"
             username: "{{ username }}"
             password: "{{ password }}"
-        name: 'SI'
-        dynamic_value: "'SI_Instances5'"
-        tag: ['SI']
+        name: 'Blacklist'
+        static_value: ['Test-One', 'Test-Two']
 
