@@ -20,7 +20,10 @@
         var: res.stdout
     - name: Create service group 'Prod-Services'
       panos_service_group:
-        provider: '{{ provider }}'
+        provider:
+            ip_address: "{{ ip_address }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
         name: 'Prod-Services'
         value: ['ssh-tcp-22', 'mysql-tcp-3306']
 
