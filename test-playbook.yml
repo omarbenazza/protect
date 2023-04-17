@@ -12,7 +12,6 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-
     - name: Create object 'Test-One'
       panos_address_object:
         provider: "{{ provider }}"
@@ -26,9 +25,7 @@
       panos_address_group:
         provider: "{{ provider }}"
         name: 'Blacklist'
-        static_value: ["{{ item }}"]
+        static_value: ["{{ item.name }}"]
         state: "merged"
-      loop:
-       - 'Test-One'
-       - 'Test-Two'
+      loop: "{{ objects }}"
 
