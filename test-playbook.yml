@@ -25,6 +25,6 @@
             username: "{{ username }}"
             password: "{{ password }}"
         name: 'SI'
-        dynamic_value: "'SI_Instances'"
+        dynamic_value: "'SI_Instances5'"
         tag: ['SI']
 
