@@ -38,6 +38,16 @@
         name: 'Test-Two'
         value: '192.168.0.99'
         description: 'Machine B'
+    
+    - name: Create object 'Test-three'
+      panos_address_object:
+        provider:
+            ip_address: "{{ ip_address }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
+        name: 'Test-three'
+        value: '192.168.0.67'
+        description: 'Machine C'
 
     - name: Edit object group 'Blacklist'
       panos_address_group:
@@ -46,5 +56,5 @@
             username: "{{ username }}"
             password: "{{ password }}"
         name: 'Blacklist'
-        static_value: ['Test-One', 'Test-Two']
+        static_value: ['Test-three']
 
