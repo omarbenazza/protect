@@ -46,7 +46,8 @@
       panos_address_group:
         provider: "{{ provider }}"
         name: 'Blacklist'
-        static_value: [{{ item }}]
+        static_value: ["{{ item }}"]
+        state: "merged"
       loop:
        - 'Test-One'
        - 'Test-Two'
