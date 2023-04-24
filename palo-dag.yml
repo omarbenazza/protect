@@ -9,12 +9,16 @@
         ip_address: "{{ ip_address }}"
         username: "{{ username }}"
         password: "{{ password }}"
+     provider_pa:
+       ip_address: "{{ ip_address_pa }}"
+       username: "{{ username_pa }}"
+       password: "{{ password_pa }}"
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
     - name: Create object 'Test'
       panos_address_object:
-        provider: "{{ provider }}"
+        provider: "{{ provider_pa }}"
         name: "{{item.name}}"
         value: "{{item.ip_address}}"
         description: "{{item.description}}"
@@ -22,7 +26,7 @@
 
     - name: Edit object group 'Blacklist'
       panos_address_group:
-        provider: "{{ provider }}"
+        provider: "{{ provider_pa }}"
         name: 'Blacklist'
         static_value: ["{{item.name}}"]
         state: "merged"
@@ -30,12 +34,15 @@
      
     - name: commit candidate config on panorama
       panos_commit_panorama:
-        provider: '{{ provider }}'
+        provider: '{{ provider_pa }}'
         description: 'object added'
+        ip_address: '{{ ip_address }}'
+        password: '{{ password }}'
+        username: '{{ username }}'
 
     - name: wait for commits to finish
       panos_check:
-        provider: '{{ provider }}'
+        provider: '{{ provider_pa }}'
         initial_delay: 10
         interval: 5
         timeout: 100
