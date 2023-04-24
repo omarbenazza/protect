@@ -27,3 +27,15 @@
         static_value: ["{{item.name}}"]
         state: "merged"
       loop: "{{ objects }}"
+     
+    - name: commit candidate config on panorama
+      panos_commit_panorama:
+        provider: '{{ provider }}'
+        description: 'object added'
+
+    - name: wait for commits to finish
+      panos_check:
+        provider: '{{ provider }}'
+        initial_delay: 10
+        interval: 5
+        timeout: 100
