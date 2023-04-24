@@ -36,9 +36,7 @@
       panos_commit_panorama:
         provider: '{{ provider_pa }}'
         description: 'object added'
-        ip_address: '{{ ip_address }}'
-        password: '{{ password }}'
-        username: '{{ username }}'
+        device_groups: '{{ device_group }}'
 
     - name: wait for commits to finish
       panos_check:
