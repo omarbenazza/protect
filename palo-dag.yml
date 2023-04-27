@@ -32,11 +32,11 @@
         state: "merged"
       loop: "{{ objects }}"
      
-    - name: commit candidate config on panorama
-      panos_commit_panorama:
-        provider: '{{ provider_pa }}'
-        description: 'object added'
-        device_groups: '{{ device_group }}'
+    - name: push to multiple devices
+      panos_commit_push:
+        provider: '{{ credentials }}'
+        style: 'device group'
+        name: '{{ device_group }}'
 
     - name: wait for commits to finish
       panos_check:
