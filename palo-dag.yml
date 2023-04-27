@@ -34,7 +34,7 @@
      
     - name: push to multiple devices
       panos_commit_push:
-        provider: '{{ credentials }}'
+        provider: '{{ provider_pa }}'
         style: 'device group'
         name: '{{ device_group }}'
 
