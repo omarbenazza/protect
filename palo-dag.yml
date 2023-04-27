@@ -31,6 +31,11 @@
         static_value: ["{{item.name}}"]
         state: "merged"
       loop: "{{ objects }}"
+      
+    - name: commit specific device group changes on panorama
+      panos_commit_panorama:
+        provider: "{{ provider_pa }}"
+        device_groups: "{{ device_group }}"
      
     - name: push to multiple devices
       panos_commit_push:
