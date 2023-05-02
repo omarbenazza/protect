@@ -5,10 +5,6 @@
   collections:
     - paloaltonetworks.panos
   vars:
-     provider: 
-        ip_address: "{{ ip_address }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
      provider_pa:
        ip_address: "{{ ip_address_pa }}"
        username: "{{ username_pa }}"
