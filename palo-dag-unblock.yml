@@ -17,7 +17,7 @@
         provider: "{{ provider_pa }}"
         name: 'Blacklist'
         static_value: ["{{item.name}}"]
-        state: "deleted"
+        state: "absent"
       loop: "{{ objects }}"
       
     - name: Remove address object
