@@ -12,13 +12,28 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-    - name: remove object group 'Blacklist'
-      panos_address_group:
-        provider: "{{ provider_pa }}"
-        name: 'Blacklist'
-        static_value: ["{{item.name}}"]
-        state: "absent"
-      loop: "{{ objects }}"
+    - name: Retrieve address group object
+      paloaltonetworks.panos.panos_address_group:
+        provider: '{{ provider }}'
+        name: 'Group-Test'
+        state: 'gathered'
+        device_group: 'DG-Test'
+      register: result
+
+    # Create Object
+    - name: Update Address Group(s)'
+      paloaltonetworks.panos.panos_address_group:
+        provider: "{{ provider }}"
+        device_group: "{{ item.Device_Group }}"
+        name: "{{ item.Name }}"
+        description: "{{ item.Description }}"
+        static_value: "{{ result.gathered.static_value | reject('in', item.Object) }}"
+      loop_control:
+        label: '{{ item.name }}'
+      loop: "{{ objects.list }}"
+      when:
+        - result.gathered.static_value
+        - item.Object in result.gathered.static_value
       
     - name: Remove address object
       panos_address_object:
