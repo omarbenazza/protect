@@ -16,7 +16,8 @@
     - name: Remove object 'Test' from Blacklist
       panos_registered_ip:
         provider: "{{ provider_pa }}"
-        ips: ["{{objects[0].name}}"]
+        ips: ["{{objects[0].ip}}"]
+        tags: ["{{objects[0].name}}"]
         state: 'absent'
 
     - name: commit specific device group changes on panorama
