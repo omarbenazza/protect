@@ -12,16 +12,12 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-  
-    - name: Remove object 'Test'
-      panos_address_object:
-        provider: "{{ provider_pa }}"
-        name: "{{item.name}}"
-        value: "{{item.ip_address}}"
-        description: "{{item.description}}"
-        state: 'absent'
 
-      loop: "{{ objects }}"
+    - name: Remove object 'Test' from Blacklist
+      panos_registered_ip:
+        provider: "{{ provider_pa }}"
+        ips: ["{{objects[0].name}}"]
+        state: 'absent'
 
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
