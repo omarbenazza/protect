@@ -20,9 +20,12 @@
         object_type: 'address-group'
       register: result
 
-    - name: Print dynamic address group 'Blacklist'
-      debug:
-        var: result.objects
+    - name: Edit object group 'Blacklist'
+      panos_address_group:
+        provider: "{{ provider_pa }}"
+        name: 'Blacklist'
+        static_value: ["{{item.name}}"]
+      loop: '{{ result.objects }}'
       
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
