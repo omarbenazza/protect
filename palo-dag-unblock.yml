@@ -13,11 +13,10 @@
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
 
-    - name: Remove address object from object group 'Blacklist'
+    - name: Delete object 'PA-TEST-VM'
       panos_address_group:
         provider: "{{ provider_pa }}"
         name: 'Blacklist'
-        static_value: ["{{objects[0].name}}"]
         state: "absent"
 
     - name: commit specific device group changes on panorama
