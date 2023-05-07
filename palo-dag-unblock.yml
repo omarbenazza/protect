@@ -1,0 +1,39 @@
+- name: test playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  collections:
+    - paloaltonetworks.panos
+  vars:
+     provider_pa:
+       ip_address: "{{ ip_address_pa }}"
+       username: "{{ username_pa }}"
+       password: "{{ password_pa }}"
+  # roles:
+  #   - role: PaloAltoNetworks.paloaltonetworks
+  tasks:
+    - name: Edit object group 'Blacklist'
+      panos_address_group:
+        provider: "{{ provider_pa }}"
+        name: 'Blacklist'
+        static_value: ["{{item.name}}"]
+        state: "merged"
+      loop: "{{ objects }}"
+      
+    - name: commit specific device group changes on panorama
+      panos_commit_panorama:
+        provider: "{{ provider_pa }}"
+        device_groups: "{{ device_group }}"
+     
+    - name: push to multiple devices
+      panos_commit_push:
+        provider: '{{ provider_pa }}'
+        style: 'device group'
+        name: '{{ device_group }}'
+
+    - name: wait for commits to finish
+      panos_check:
+        provider: '{{ provider_pa }}'
+        initial_delay: 10
+        interval: 5
+        timeout: 100
