@@ -12,6 +12,14 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
+    - name: Create object 'Test'
+      panos_address_object:
+        provider: "{{ provider_pa }}"
+        name: "{{item.name}}"
+        value: "{{item.ip_address}}"
+        description: "{{item.description}}"
+      loop: "{{ objects }}"
+
     - name: Edit object group 'Blacklist'
       panos_address_group:
         provider: "{{ provider_pa }}"
