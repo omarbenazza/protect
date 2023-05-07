@@ -26,16 +26,14 @@
     - name: Update Address Group(s)'
       panos_address_group:
         provider: "{{ provider_pa }}"
-        device_group: "{{ item.Device_Group }}"
-        name: "{{ item.Name }}"
-        description: "{{ item.Description }}"
-        static_value: "{{ result.gathered.static_value | reject('in', item.Object) }}"
+        name: "Blacklist"
+        static_value: "{{ result.gathered.static_value | reject('in', item.name) }}"
       loop_control:
         label: '{{ item.name }}'
       loop: "{{ objects }}"
       when:
         - result.gathered.static_value
-        - item.Object in result.gathered.static_value
+        - item.name in result.gathered.static_value
       
     - name: Remove address object
       panos_address_object:
