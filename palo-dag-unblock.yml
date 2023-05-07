@@ -13,12 +13,12 @@
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
 
-    - name: Remove object 'Test' from Blacklist
-      panos_registered_ip:
+    - name: Remove address object from object group 'Blacklist'
+      panos_address_group:
         provider: "{{ provider_pa }}"
-        ips: ["{{objects[0].ip_address}}"]
-        tags: ["{{objects[0].name}}"]
-        state: 'absent'
+        name: 'Blacklist'
+        static_value: ["{{objects[0].name}}"]
+        state: "absent"
 
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
