@@ -12,13 +12,6 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-    - name: Remove address object
-      panos_address_object:
-        provider: "{{ provider_pa }}"
-        name: "{{ item.name }}"
-        state: 'absent'
-      loop: "{{ objects }}"
-
     - name: remove object group 'Blacklist'
       panos_address_group:
         provider: "{{ provider_pa }}"
@@ -27,6 +20,13 @@
         state: "deleted"
       loop: "{{ objects }}"
       
+    - name: Remove address object
+      panos_address_object:
+        provider: "{{ provider_pa }}"
+        name: "{{ item.name }}"
+        state: 'absent'
+      loop: "{{ objects }}"
+
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
         provider: "{{ provider_pa }}"
