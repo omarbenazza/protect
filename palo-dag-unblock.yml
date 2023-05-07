@@ -16,7 +16,7 @@
     - name: Remove object 'Test' from Blacklist
       panos_registered_ip:
         provider: "{{ provider_pa }}"
-        ips: ["{{objects[0].ip}}"]
+        ips: ["{{objects[0].ip_address}}"]
         tags: ["{{objects[0].name}}"]
         state: 'absent'
 
