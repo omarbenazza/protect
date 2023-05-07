@@ -14,7 +14,7 @@
   tasks:
     - name: Retrieve address group object
       paloaltonetworks.panos.panos_address_group:
-        provider: '{{ provider }}'
+        provider: '{{ provider_pa }}'
         name: 'Blacklist'
         state: 'gathered'
         device_group: 'Device-group-1'
@@ -23,7 +23,7 @@
     # Create Object
     - name: Update Address Group(s)'
       paloaltonetworks.panos.panos_address_group:
-        provider: "{{ provider }}"
+        provider: "{{ provider_pa }}"
         device_group: "{{ item.Device_Group }}"
         name: "{{ item.Name }}"
         description: "{{ item.Description }}"
