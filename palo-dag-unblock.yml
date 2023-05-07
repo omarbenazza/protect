@@ -12,20 +12,20 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-
-    - name: Retrieve dynamic address group 'Blacklist'
-      panos_object_facts:
+    - name: Remove address object
+      panos_address_object:
         provider: "{{ provider_pa }}"
-        name: 'Blacklist'
-        object_type: 'address-group'
-      register: result
+        name: "{{ item.name }}"
+        state: 'absent'
+      loop: "{{ objects }}"
 
-    - name: Edit object group 'Blacklist'
+    - name: remove object group 'Blacklist'
       panos_address_group:
         provider: "{{ provider_pa }}"
         name: 'Blacklist'
         static_value: ["{{item.name}}"]
-      loop: '{{ result.objects }}'
+        state: "deleted"
+      loop: "{{ objects }}"
       
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
