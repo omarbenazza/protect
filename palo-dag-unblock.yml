@@ -12,11 +12,11 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-    - name: Remove object 
+    - name: Remove object 'Test'
       panos_address_object:
         provider: "{{ provider_pa }}"
         name: "{{item.name}}"
-        state: 'absent'
+      loop: "{{ objects }}"
 
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
