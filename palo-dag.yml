@@ -18,6 +18,7 @@
         name: "{{item.name}}"
         value: "{{item.ip_address}}"
         description: "{{item.description}}"
+        state: 'absent'
       loop: "{{ objects }}"
 
     - name: Edit object group 'Blacklist'
