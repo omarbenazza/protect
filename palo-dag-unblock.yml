@@ -22,7 +22,7 @@
 
     - name: Print dynamic address group 'Blacklist'
       debug:
-        var: result
+        var: result.objects
       
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
