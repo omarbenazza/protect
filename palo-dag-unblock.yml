@@ -12,25 +12,14 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-  
-    - name: Remove object from object group 'Blacklist'
-      panos_address_group:
+    - name: Remove object 
+      panos_address_object:
         provider: "{{ provider_pa }}"
-        name: 'Blacklist'
-        static_value: "{{ static_value | reject('equalto', item.name) | list }}"
-        state: "merged"
-      loop: "{{ objects }}"
-      vars:
-        static_value: "{{ lookup('panos_address_group', 'name=Blacklist provider='+provider_pa.ip_address+' username='+provider_pa.username+' password='+provider_pa.password).static_value }}"
+        name: "{{item.name}}"
+        value: "{{item.ip_address}}"
+        description: "{{item.description}}"
+        state: 'absent'
 
-    - name: Edit object group 'Blacklist'
-      panos_address_group:
-        provider: "{{ provider_pa }}"
-        name: 'Blacklist'
-        static_value: ["{{item.name}}"]
-        state: "absent"
-      loop: "{{ objects }}"
-      
     - name: commit specific device group changes on panorama
       panos_commit_panorama:
         provider: "{{ provider_pa }}"
