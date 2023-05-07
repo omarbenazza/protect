@@ -18,6 +18,9 @@
         name: 'Blacklist'
         state: 'gathered'
       register: result
+   
+   - debug:
+       var: result.gathered.static_value
       
     # Create Object
     - name: Update Address Group(s)'
