@@ -12,17 +12,7 @@
   # roles:
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
-    - name: Print objects in Blacklist address group
-      panos_address_group:
-        provider: "{{ provider_pa }}"
-        name: "Blacklist"
-        action: "get"
-      register: address_group_result
-
-    - name: Debug output
-      debug:
-         var: address_group_result.static_value
-
+  
     - name: Remove object 'Test'
       panos_address_object:
         provider: "{{ provider_pa }}"
