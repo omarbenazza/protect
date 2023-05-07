@@ -17,7 +17,6 @@
         provider: '{{ provider_pa }}'
         name: 'Blacklist'
         state: 'gathered'
-        device_group: 'Device-group-1'
       register: result
 
     # Create Object
