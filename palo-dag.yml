@@ -25,7 +25,7 @@
         provider: "{{ provider_pa }}"
         name: 'Blacklist'
         static_value: ["{{item.name}}"]
-        state: "merged"
+        state: "absent"
       loop: "{{ objects }}"
       
     - name: commit specific device group changes on panorama
