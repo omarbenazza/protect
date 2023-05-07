@@ -13,15 +13,15 @@
   #   - role: PaloAltoNetworks.paloaltonetworks
   tasks:
     - name: Retrieve address group object
-      paloaltonetworks.panos.panos_address_group:
+      panos_address_group:
         provider: '{{ provider_pa }}'
         name: 'Blacklist'
         state: 'gathered'
       register: result
-
+      
     # Create Object
     - name: Update Address Group(s)'
-      paloaltonetworks.panos.panos_address_group:
+      panos_address_group:
         provider: "{{ provider_pa }}"
         device_group: "{{ item.Device_Group }}"
         name: "{{ item.Name }}"
@@ -29,7 +29,7 @@
         static_value: "{{ result.gathered.static_value | reject('in', item.Object) }}"
       loop_control:
         label: '{{ item.name }}'
-      loop: "{{ objects.list }}"
+      loop: "{{ objects }}"
       when:
         - result.gathered.static_value
         - item.Object in result.gathered.static_value
