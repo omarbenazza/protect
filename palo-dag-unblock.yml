@@ -16,8 +16,6 @@
       panos_address_object:
         provider: "{{ provider_pa }}"
         name: "{{item.name}}"
-        value: "{{item.ip_address}}"
-        description: "{{item.description}}"
         state: 'absent'
 
     - name: commit specific device group changes on panorama
